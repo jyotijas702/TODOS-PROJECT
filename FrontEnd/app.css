@@ -46,3 +46,14 @@ body {
     width: 8rem;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .todo-item,
+  #todo-input {
+    width: 80vw;
+  }
+
+  .todo-item {
+    flex-direction: column;
+  }
+}
