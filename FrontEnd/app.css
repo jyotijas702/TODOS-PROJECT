@@ -2,7 +2,47 @@
   list-style-type: none;
 }
 
-#todo-list li {
+.todo-item {
+  width: 50vw;
   display: flex;
   gap: 6px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: aliceblue;
+  border: 2px solid rgb(215, 224, 231);
+  border-radius: 4px;
+  margin-block: 1rem;
+  padding: 8px;
+}
+
+#todo-input {
+  width: 50vw;
+  margin-block: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.action-btns {
+  display: flex;
+  gap: 6px;
+  button {
+    width: 8rem;
+  }
 }

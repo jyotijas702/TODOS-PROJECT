@@ -28,6 +28,9 @@ todos.forEach((todo) => {
   todoTitleEl.innerText = todo.task;
   todoTitleEl.className = "todo-title";
 
+  const actions = document.createElement("div");
+  actions.className = "action-btns";
+
   const finishBtn = document.createElement("button");
   finishBtn.innerHTML = `<span class="finish-btn">Finish</span>✓`;
   finishBtn.dataset.todoId = todo.id;
@@ -40,13 +43,14 @@ todos.forEach((todo) => {
   deleteBtn.innerHTML = `<span class="delete-btn">Delete</span>❌`;
   deleteBtn.dataset.todoId = todo.id;
 
-  todoEl.appendChild(todoTitleEl);
   if (todo.isDone) {
-    todoEl.appendChild(undoBtn);
+    actions.appendChild(undoBtn);
   } else {
-    todoEl.appendChild(finishBtn);
+    actions.appendChild(finishBtn);
   }
-  todoEl.appendChild(deleteBtn);
+  actions.appendChild(deleteBtn);
 
+  todoEl.appendChild(todoTitleEl);
+  todoEl.appendChild(actions);
   todoListEl.appendChild(todoEl);
 });
