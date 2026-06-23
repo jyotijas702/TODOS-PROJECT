@@ -47,6 +47,15 @@ body {
   }
 }
 
+.finished-todo {
+  background-color: #eee;
+
+  .todo-title {
+    text-decoration: line-through;
+    color: maroon;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .todo-item,
   #todo-input {

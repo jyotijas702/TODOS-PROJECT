@@ -19,38 +19,44 @@ const todos = [
   },
 ];
 
-const todoListEl = document.querySelector("#todo-list");
-todos.forEach((todo) => {
-  const todoEl = document.createElement("li");
-  todoEl.className = "todo-item";
+const showTodos = () => {
+  const todoListEl = document.querySelector("#todo-list");
+  todoListEl.replaceChildren();
 
-  const todoTitleEl = document.createElement("p");
-  todoTitleEl.innerText = todo.task;
-  todoTitleEl.className = "todo-title";
+  todos.forEach((todo) => {
+    const todoEl = document.createElement("li");
+    todoEl.className = `todo-item ${todo.isDone ? "finished-todo" : "pending-todo"}`;
 
-  const actions = document.createElement("div");
-  actions.className = "action-btns";
+    const todoTitleEl = document.createElement("p");
+    todoTitleEl.innerText = todo.task;
+    todoTitleEl.className = "todo-title";
 
-  const finishBtn = document.createElement("button");
-  finishBtn.innerHTML = `<span class="finish-btn">Finish</span>✓`;
-  finishBtn.dataset.todoId = todo.id;
+    const actions = document.createElement("div");
+    actions.className = "action-btns";
 
-  const undoBtn = document.createElement("button");
-  undoBtn.innerHTML = `<span class="undo-btn">Undo</span>↩`;
-  undoBtn.dataset.todoId = todo.id;
+    const finishBtn = document.createElement("button");
+    finishBtn.innerHTML = `<span class="finish-btn">Finish</span>✓`;
+    finishBtn.dataset.todoId = todo.id;
 
-  const deleteBtn = document.createElement("button");
-  deleteBtn.innerHTML = `<span class="delete-btn">Delete</span>❌`;
-  deleteBtn.dataset.todoId = todo.id;
+    const undoBtn = document.createElement("button");
+    undoBtn.innerHTML = `<span class="undo-btn">Undo</span>↩`;
+    undoBtn.dataset.todoId = todo.id;
 
-  if (todo.isDone) {
-    actions.appendChild(undoBtn);
-  } else {
-    actions.appendChild(finishBtn);
-  }
-  actions.appendChild(deleteBtn);
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = `<span class="delete-btn">Delete</span>❌`;
+    deleteBtn.dataset.todoId = todo.id;
 
-  todoEl.appendChild(todoTitleEl);
-  todoEl.appendChild(actions);
-  todoListEl.appendChild(todoEl);
-});
+    if (todo.isDone) {
+      actions.appendChild(undoBtn);
+    } else {
+      actions.appendChild(finishBtn);
+    }
+    actions.appendChild(deleteBtn);
+
+    todoEl.appendChild(todoTitleEl);
+    todoEl.appendChild(actions);
+    todoListEl.appendChild(todoEl);
+  });
+};
+
+showTodos();
