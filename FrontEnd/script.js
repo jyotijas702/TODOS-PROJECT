@@ -59,4 +59,36 @@ const showTodos = () => {
   });
 };
 
+const addTodo = (content) => {
+  if (content === "") {
+    alert("Content can not be blank!");
+    return;
+  }
+
+  todos.push({
+    task: content,
+    isDone: false,
+    createdAt: new Date(),
+    id: "sample",
+  });
+
+  showTodos();
+};
+
+const deleteTodo = () => {};
+
+const finishTodo = () => {};
+
+const undoTodo = () => {};
+
+// initialization process
 showTodos();
+
+const input = document.querySelector("#todo-input");
+input.addEventListener("keydown", (e) => {
+  if (event.key !== "Enter") return;
+
+  const content = e.target.value.trim();
+  addTodo(content);
+  input.value = "";
+});
