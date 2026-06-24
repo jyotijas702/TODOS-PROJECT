@@ -12,7 +12,7 @@
   border: 2px solid rgb(215, 224, 231);
   border-radius: 4px;
   margin-block: 1rem;
-  padding: 8px;
+  padding: 0 16px;
 }
 
 #todo-input {
@@ -44,6 +44,7 @@ body {
   gap: 6px;
   button {
     width: 8rem;
+    margin: 0;
   }
 }
 
@@ -64,5 +65,9 @@ body {
 
   .todo-item {
     flex-direction: column;
+  }
+
+  .action-btn-text {
+    display: none;
   }
 }

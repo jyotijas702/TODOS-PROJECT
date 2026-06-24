@@ -1,4 +1,4 @@
-const todos = [
+let todos = [
   {
     task: "Go for walk",
     isDone: false,
@@ -23,40 +23,45 @@ const showTodos = () => {
   const todoListEl = document.querySelector("#todo-list");
   todoListEl.replaceChildren();
 
-  todos.forEach((todo) => {
-    const todoEl = document.createElement("li");
-    todoEl.className = `todo-item ${todo.isDone ? "finished-todo" : "pending-todo"}`;
+  todos
+    .toSorted((a, b) => a.isDone - b.isDone)
+    .forEach((todo) => {
+      const todoEl = document.createElement("li");
+      todoEl.className = `todo-item ${todo.isDone ? "finished-todo" : "pending-todo"}`;
 
-    const todoTitleEl = document.createElement("p");
-    todoTitleEl.innerText = todo.task;
-    todoTitleEl.className = "todo-title";
+      const todoTitleEl = document.createElement("p");
+      todoTitleEl.innerText = todo.task;
+      todoTitleEl.className = "todo-title";
 
-    const actions = document.createElement("div");
-    actions.className = "action-btns";
+      const actions = document.createElement("div");
+      actions.className = "action-btns";
 
-    const finishBtn = document.createElement("button");
-    finishBtn.innerHTML = `<span class="finish-btn">Finish</span>✓`;
-    finishBtn.dataset.todoId = todo.id;
+      const finishBtn = document.createElement("button");
+      finishBtn.className = "finish-btn";
+      finishBtn.innerHTML = `<span class="action-btn-text">Finish</span>✓`;
+      finishBtn.onclick = () => finishTodo(todo.id);
 
-    const undoBtn = document.createElement("button");
-    undoBtn.innerHTML = `<span class="undo-btn">Undo</span>↩`;
-    undoBtn.dataset.todoId = todo.id;
+      const undoBtn = document.createElement("button");
+      undoBtn.className = "undo-btn";
+      undoBtn.innerHTML = `<span class="action-btn-text">Undo</span>↩`;
+      undoBtn.onclick = () => undoTodo(todo.id);
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.innerHTML = `<span class="delete-btn">Delete</span>❌`;
-    deleteBtn.dataset.todoId = todo.id;
+      const deleteBtn = document.createElement("button");
+      deleteBtn.className = "delete-btn";
+      deleteBtn.innerHTML = `<span class="action-btn-text">Delete</span>❌`;
+      deleteBtn.onclick = () => deleteTodo(todo.id);
 
-    if (todo.isDone) {
-      actions.appendChild(undoBtn);
-    } else {
-      actions.appendChild(finishBtn);
-    }
-    actions.appendChild(deleteBtn);
+      if (todo.isDone) {
+        actions.appendChild(undoBtn);
+      } else {
+        actions.appendChild(finishBtn);
+      }
+      actions.appendChild(deleteBtn);
 
-    todoEl.appendChild(todoTitleEl);
-    todoEl.appendChild(actions);
-    todoListEl.appendChild(todoEl);
-  });
+      todoEl.appendChild(todoTitleEl);
+      todoEl.appendChild(actions);
+      todoListEl.appendChild(todoEl);
+    });
 };
 
 const addTodo = (content) => {
@@ -69,17 +74,28 @@ const addTodo = (content) => {
     task: content,
     isDone: false,
     createdAt: new Date(),
-    id: "sample",
+    id: "sample" + Math.random(),
   });
 
   showTodos();
 };
 
-const deleteTodo = () => {};
+const deleteTodo = (id) => {
+  todos = todos.filter((todo) => todo.id !== id);
+  showTodos();
+};
 
-const finishTodo = () => {};
+const finishTodo = (id) => {
+  targetTodo = todos.find((todo) => todo.id === id);
+  targetTodo.isDone = true;
+  showTodos();
+};
 
-const undoTodo = () => {};
+const undoTodo = (id) => {
+  targetTodo = todos.find((todo) => todo.id === id);
+  targetTodo.isDone = false;
+  showTodos();
+};
 
 // initialization process
 showTodos();
