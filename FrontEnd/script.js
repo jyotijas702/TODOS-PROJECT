@@ -1,3 +1,4 @@
+const BASE_URL = "http://localhost:3000";
 let todos = [];
 
 const showTodos = () => {
@@ -78,8 +79,21 @@ const undoTodo = (id) => {
   showTodos();
 };
 
+const fetchTodos = async () => {
+  try {
+    const response = await fetch(BASE_URL + "/todos");
+    return await response.json();
+  } catch {
+    alert("Unable to fetch todos!");
+    return [];
+  }
+};
+
 // initialization process
-showTodos();
+fetchTodos().then((fetchedTodos) => {
+  todos = fetchedTodos;
+  showTodos();
+});
 
 const input = document.querySelector("#todo-input");
 input.addEventListener("keydown", (e) => {

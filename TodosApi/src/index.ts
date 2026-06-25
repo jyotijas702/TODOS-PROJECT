@@ -1,10 +1,12 @@
 import express, { Application, Request, Response } from "express";
+import cors from "cors";
 import mongoose from "mongoose";
 import { MONGO_URL, PORT } from "./constants";
 import { TodoModel } from "./db/todo";
 
 const app: Application = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
   res.json({ message: "Hello from Express with TypeScript!" });
@@ -16,7 +18,16 @@ app.get("/todos", async (req: Request, res: Response) => {
     "isDone",
     "createdAt",
   ]);
-  res.json(todos);
+  res.json(
+    todos.map((todo) => {
+      return {
+        id: todo._id,
+        createdAt: todo.createdAt,
+        task: todo.task,
+        isDone: todo.isDone,
+      };
+    }),
+  );
 });
 
 mongoose
