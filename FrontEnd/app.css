@@ -78,6 +78,7 @@ body {
   .todo-item,
   #todo-input {
     width: 80vw;
+    padding-bottom: 32px;
   }
 
   .todo-item {
