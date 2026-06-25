@@ -15,3 +15,18 @@ export async function getAllTodos() {
     };
   });
 }
+
+export async function createTodo(task: string) {
+  const todo = new TodoModel({
+    task: task,
+    isDone: false,
+    createdAt: Date.now(),
+  });
+  await todo.save();
+  return {
+    id: todo._id,
+    task: todo.task,
+    isDone: todo.isDone,
+    createdAt: todo.createdAt,
+  };
+}

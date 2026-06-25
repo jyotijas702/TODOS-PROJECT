@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { Todo } from "../types/todo";
+import { Todo } from "../../types/todo";
 
 const todoSchema = new Schema<Todo>({
   task: {
