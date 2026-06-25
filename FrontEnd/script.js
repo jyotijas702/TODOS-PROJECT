@@ -30,7 +30,7 @@ const showTodos = () => {
 
       const deleteBtn = document.createElement("button");
       deleteBtn.className = "delete-btn";
-      deleteBtn.innerHTML = `<span class="action-btn-text">Delete</span>❌`;
+      deleteBtn.innerHTML = `<span class="action-btn-text">Delete</span>⌫`;
       deleteBtn.onclick = () => deleteTodo(todo.id);
 
       if (todo.isDone) {
