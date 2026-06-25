@@ -62,7 +62,7 @@ const addTodo = async (content) => {
 };
 
 const deleteTodo = async (id) => {
-  const response = await fetch(BASE_URL + "/todos/" + id, {
+  const response = await fetch(`${BASE_URL}/todos/${id}`, {
     method: "DELETE",
   });
 
