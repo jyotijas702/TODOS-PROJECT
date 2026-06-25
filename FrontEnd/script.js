@@ -1,23 +1,4 @@
-let todos = [
-  {
-    task: "Go for walk",
-    isDone: false,
-    createdAt: new Date(),
-    id: "1tsegfc",
-  },
-  {
-    task: "Do Yoga",
-    isDone: true,
-    createdAt: new Date("2026-06-21"),
-    id: "2hncg",
-  },
-  {
-    task: "Drink Water",
-    isDone: true,
-    createdAt: new Date("2026-06-20"),
-    id: "3vfredc",
-  },
-];
+let todos = [];
 
 const showTodos = () => {
   const todoListEl = document.querySelector("#todo-list");
