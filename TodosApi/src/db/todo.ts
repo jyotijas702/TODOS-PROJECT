@@ -10,11 +10,10 @@ const todoSchema = new Schema<Todo>({
     type: Boolean,
     default: false,
   },
-
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
 
-export const TodoModel = mongoose.model<Todo>("TodoModel", todoSchema);
+export const TodoModel = mongoose.model<Todo>("Todo", todoSchema);

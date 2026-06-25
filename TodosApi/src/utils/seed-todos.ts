@@ -4,23 +4,18 @@ import { MONGO_URL } from "../constants";
 
 mongoose
   .connect(MONGO_URL)
-  .then(() => {
+  .then(async () => {
     console.log("DB Connected");
+    await TodoModel.insertMany([
+      { task: "Do Yoga", isDone: true, createdAt: Date.now() },
+      { task: "Drink Water", isDone: true, createdAt: Date.now() },
+      { task: "Practice Guitar", isDone: false, createdAt: Date.now() },
+      { task: "Learn new language", isDone: false, createdAt: Date.now() },
+    ]);
+    console.log("Todos Seeded...");
   })
-  .catch((err) => {
-    console.log(err);
+  .catch(console.error)
+  .finally(() => {
+    mongoose.disconnect();
+    process.exit(0);
   });
-
-const addTodo = async () => {
-  const res = await TodoModel.insertMany([
-    { task: "Do Yoga", isDone: true, createdAt: Date.now() },
-    { task: "Drink Water", isDone: true, createdAt: Date.now() },
-    { task: "Practice Guitar", isDone: false, createdAt: Date.now() },
-    { task: "Learn new language", isDone: false, createdAt: Date.now() },
-  ]);
-  console.log(res);
-};
-
-addTodo().then(() => {
-  console.log("Todos Seeded...");
-});
