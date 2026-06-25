@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { getAllTodos } from "../db/queries";
+import { getAllTodos } from "../db/todos/queries";
 
 const router = Router();
 
