@@ -1,34 +1,14 @@
-import express, { Application, Request, Response } from "express";
+import express, { Application } from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import { MONGO_URL, PORT } from "./constants";
-import { TodoModel } from "./db/todo";
+import todosRouter from "./routes/todos";
 
 const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req: Request, res: Response) => {
-  res.json({ message: "Hello from Express with TypeScript!" });
-});
-
-app.get("/todos", async (req: Request, res: Response) => {
-  const todos = await TodoModel.find({}).select([
-    "task",
-    "isDone",
-    "createdAt",
-  ]);
-  res.json(
-    todos.map((todo) => {
-      return {
-        id: todo._id,
-        createdAt: todo.createdAt,
-        task: todo.task,
-        isDone: todo.isDone,
-      };
-    }),
-  );
-});
+app.use("/todos", todosRouter);
 
 mongoose
   .connect(MONGO_URL)
