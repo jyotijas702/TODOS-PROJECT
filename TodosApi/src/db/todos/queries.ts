@@ -30,3 +30,16 @@ export async function createTodo(task: string) {
     createdAt: todo.createdAt,
   };
 }
+
+export async function deleteTodo(id: string) {
+  const result = await TodoModel.findByIdAndDelete(id);
+  if (!result) {
+    throw new Error("Todo not found");
+  }
+  return {
+    id: result._id,
+    task: result.task,
+    isDone: result.isDone,
+    createdAt: result.createdAt,
+  };
+}

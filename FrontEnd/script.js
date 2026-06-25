@@ -61,7 +61,16 @@ const addTodo = async (content) => {
   showTodos();
 };
 
-const deleteTodo = (id) => {
+const deleteTodo = async (id) => {
+  const response = await fetch(BASE_URL + "/todos/" + id, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    alert("Failed to delete todo!");
+    return;
+  }
+
   TODOS = TODOS.filter((todo) => todo.id !== id);
   showTodos();
 };

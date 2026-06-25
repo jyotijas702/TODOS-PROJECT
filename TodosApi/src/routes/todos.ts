@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { createTodo, getAllTodos } from "../db/todos/queries";
+import { createTodo, deleteTodo, getAllTodos } from "../db/todos/queries";
 
 const router = Router();
 
@@ -14,6 +14,16 @@ router.post("/", async (req: Request, res: Response) => {
   }
   const newTodo = await createTodo(task);
   res.status(201).json(newTodo);
+});
+
+router.delete("/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const deletedTodo = await deleteTodo(id as string);
+    res.json(deletedTodo);
+  } catch (error) {
+    res.status(404).json({ error: "Todo not found" });
+  }
 });
 
 export default router;
