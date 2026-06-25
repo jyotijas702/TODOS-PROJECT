@@ -43,3 +43,37 @@ export async function deleteTodo(id: string) {
     createdAt: result.createdAt,
   };
 }
+
+export async function finishTodo(id: string) {
+  const result = await TodoModel.findByIdAndUpdate(
+    id,
+    { isDone: true },
+    { new: true },
+  );
+  if (!result) {
+    throw new Error("Todo not found");
+  }
+  return {
+    id: result._id,
+    task: result.task,
+    isDone: result.isDone,
+    createdAt: result.createdAt,
+  };
+}
+
+export async function undoTodo(id: string) {
+  const result = await TodoModel.findByIdAndUpdate(
+    id,
+    { isDone: false },
+    { new: true },
+  );
+  if (!result) {
+    throw new Error("Todo not found");
+  }
+  return {
+    id: result._id,
+    task: result.task,
+    isDone: result.isDone,
+    createdAt: result.createdAt,
+  };
+}

@@ -75,13 +75,29 @@ const deleteTodo = async (id) => {
   showTodos();
 };
 
-const finishTodo = (id) => {
+const finishTodo = async (id) => {
+  const response = await fetch(`${BASE_URL}/todos/${id}/finish`, {
+    method: "PATCH",
+  });
+
+  if (!response.ok) {
+    alert("Failed to finish todo!");
+    return;
+  }
   targetTodo = TODOS.find((todo) => todo.id === id);
   targetTodo.isDone = true;
   showTodos();
 };
 
-const undoTodo = (id) => {
+const undoTodo = async (id) => {
+  const response = await fetch(`${BASE_URL}/todos/${id}/undo`, {
+    method: "PATCH",
+  });
+
+  if (!response.ok) {
+    alert("Failed to undo todo!");
+    return;
+  }
   targetTodo = TODOS.find((todo) => todo.id === id);
   targetTodo.isDone = false;
   showTodos();
